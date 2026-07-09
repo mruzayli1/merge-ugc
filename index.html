@@ -1,5 +1,3 @@
-
-
 <!doctype html>
 <html lang="tr">
 <head>
@@ -13,35 +11,90 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --primary:#3D5A80; --primary-hover:#2E4A6E; --primary-light:#6F8FB5;
-      --secondary:#E7DBCE; --background:#E6DED6; --card:#F7F4F0;
-      --text:#1D2433; --muted:#6B7280; --border:#D8CEC4; --success:#3FA66B;
+      --primary:#3D5A80;
+      --primary-hover:#2E4A6E;
+      --primary-light:#6F8FB5;
+      --secondary:#E7DBCE;
+      --background:#E6DED6;
+      --card:#F7F4F0;
+      --text:#1D2433;
+      --muted:#6B7280;
+      --border:#D8CEC4;
+      --success:#3FA66B;
     }
-    body{font-family:'Work Sans',sans-serif;background:var(--background);color:var(--text)}
-    .display{font-family:'Fraunces',serif}
+
     html{scroll-behavior:smooth}
-    @keyframes riseIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
-    .rise{opacity:0;animation:riseIn .8s cubic-bezier(.2,.7,.2,1) forwards}.d1{animation-delay:.05s}.d2{animation-delay:.18s}.d3{animation-delay:.31s}.d4{animation-delay:.44s}
-    @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}.float{animation:floaty 5s ease-in-out infinite}
-    @keyframes scrollX{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-    .marquee-track{display:flex;gap:3rem;white-space:nowrap;animation:scrollX 22s linear infinite}
-    .btn{background:var(--primary);color:white}.btn:hover{background:var(--primary-hover)}
-    .btn-outline{border-color:var(--primary);color:var(--primary);background:transparent}.btn-outline:hover{background:var(--primary);color:white}
-    .card{background:var(--card);border:1px solid var(--border);box-shadow:0 20px 45px rgba(29,36,51,.08)}
+    body{
+      font-family:'Work Sans',sans-serif;
+      background:var(--background);
+      color:var(--text);
+    }
+    .display{font-family:'Fraunces',serif}
+
+    @keyframes riseIn{
+      from{opacity:0;transform:translateY(24px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+    .rise{opacity:0;animation:riseIn .8s cubic-bezier(.2,.7,.2,1) forwards}
+    .d1{animation-delay:.05s}.d2{animation-delay:.18s}.d3{animation-delay:.31s}.d4{animation-delay:.44s}
+
+    @keyframes floaty{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-10px)}
+    }
+    .float{animation:floaty 5s ease-in-out infinite}
+
+    @keyframes scrollX{
+      from{transform:translateX(0)}
+      to{transform:translateX(-50%)}
+    }
+    .marquee-track{
+      display:flex;
+      gap:3rem;
+      white-space:nowrap;
+      animation:scrollX 22s linear infinite;
+    }
+
+    .btn{background:var(--primary);color:white}
+    .btn:hover{background:var(--primary-hover)}
+    .btn-outline{
+      border-color:var(--primary);
+      color:var(--primary);
+      background:transparent;
+    }
+    .btn-outline:hover{background:var(--primary);color:white}
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      box-shadow:0 20px 45px rgba(29,36,51,.08);
+    }
     .tag{background:rgba(61,90,128,.12);color:var(--primary)}
-    .glass{background:rgba(247,244,240,.72);border-bottom:1px solid rgba(216,206,196,.7)}
-    .soft-img{background:linear-gradient(135deg,#d7c9bc,#f8f5f0 45%,#8aa4c4);}
+    .glass{
+      background:rgba(247,244,240,.72);
+      border-bottom:1px solid rgba(216,206,196,.7);
+    }
+    .soft-img{
+      background:linear-gradient(135deg,#d7c9bc,#f8f5f0 45%,#8aa4c4);
+    }
+    .success-circle{
+      background:var(--success);
+      color:white;
+    }
   </style>
 </head>
+
 <body class="min-h-screen w-full">
   <header class="sticky top-0 z-50 w-full backdrop-blur-md glass">
     <nav class="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between">
       <a href="#top" class="display font-black tracking-tight text-2xl">Merge UGC</a>
+
       <div class="hidden md:flex items-center gap-8">
         <a href="#services" class="text-sm font-semibold hover:opacity-60 transition">Hizmetler</a>
         <a href="#showcase" class="text-sm font-semibold hover:opacity-60 transition">İşlerimiz</a>
         <a href="#about" class="text-sm font-semibold hover:opacity-60 transition">Hakkımızda</a>
       </div>
+
       <a href="#contact" class="btn rounded-full px-5 py-2.5 text-sm font-bold hover:scale-105 transition">İletişime Geç</a>
     </nav>
   </header>
@@ -50,14 +103,24 @@
     <section class="w-full overflow-hidden">
       <div class="max-w-6xl mx-auto px-5 pt-12 pb-16 grid lg:grid-cols-2 gap-12 items-center">
         <div>
-          <span class="tag rise d1 inline-block rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-widest mb-6">Creator-first UGC agency</span>
-          <h1 class="display rise d2 font-black leading-[1.02] mb-6 text-5xl md:text-7xl">Markalar için gerçek, hızlı ve güçlü UGC içerikler.</h1>
-          <p class="rise d3 text-lg leading-relaxed mb-8 max-w-lg text-[#6B7280]">Merge UGC; markaları doğru creator’larla buluşturan, strateji, üretim ve performans odaklı içerik süreçlerini tek çatı altında yöneten yeni nesil UGC ajansıdır.</p>
+          <span class="tag rise d1 inline-block rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-widest mb-6">
+            Creator-first UGC agency
+          </span>
+
+          <h1 class="display rise d2 font-black leading-[1.02] mb-6 text-5xl md:text-7xl">
+            Markalar için gerçek, hızlı ve güçlü UGC içerikler.
+          </h1>
+
+          <p class="rise d3 text-lg leading-relaxed mb-8 max-w-lg text-[#6B7280]">
+            Merge UGC; markaları doğru creator’larla buluşturan, strateji, üretim ve performans odaklı içerik süreçlerini tek çatı altında yöneten yeni nesil UGC ajansıdır.
+          </p>
+
           <div class="flex flex-wrap gap-4 rise d4">
             <a href="#contact" class="btn rounded-full px-7 py-3.5 font-bold hover:scale-105 transition">Brief Gönder</a>
             <a href="#showcase" class="btn-outline rounded-full px-7 py-3.5 font-bold border-2 hover:scale-105 transition">İçerikleri Gör</a>
           </div>
         </div>
+
         <div class="relative rise d3">
           <div class="rounded-[2rem] overflow-hidden shadow-2xl rotate-2 soft-img h-[26rem] flex items-end p-8">
             <div class="w-full grid grid-cols-3 gap-3">
@@ -66,39 +129,96 @@
               <div class="h-60 rounded-3xl bg-white/45 backdrop-blur shadow-xl mt-8"></div>
             </div>
           </div>
+
           <div class="card float absolute -left-4 top-8 rounded-2xl px-5 py-3 shadow-xl">
-            <p class="display font-black leading-none text-3xl">48h</p><p class="text-xs font-semibold text-[#6B7280]">hızlı üretim</p>
+            <p class="display font-black leading-none text-3xl">48h</p>
+            <p class="text-xs font-semibold text-[#6B7280]">hızlı üretim</p>
           </div>
+
           <div class="card float absolute -right-3 bottom-10 rounded-2xl px-5 py-3 shadow-xl" style="animation-delay:1.5s">
-            <p class="display font-black leading-none text-3xl">UGC</p><p class="text-xs font-semibold text-[#6B7280]">strateji + üretim</p>
+            <p class="display font-black leading-none text-3xl">UGC</p>
+            <p class="text-xs font-semibold text-[#6B7280]">strateji + üretim</p>
           </div>
         </div>
       </div>
     </section>
 
     <section class="w-full py-8 border-y border-[#D8CEC4]">
-      <p class="text-center text-xs font-bold uppercase tracking-[0.25em] mb-5 text-[#6B7280]">Marka dili, creator enerjisiyle birleşir</p>
-      <div class="overflow-hidden"><div class="marquee-track"><span class="display text-2xl font-bold opacity-40">Beauty ✦ Lifestyle ✦ Fashion ✦ Food ✦ Tech ✦ Travel ✦ Apps ✦</span><span class="display text-2xl font-bold opacity-40">Merge UGC ✦ Merge UGC ✦ Merge UGC ✦ Merge UGC</span></div></div>
+      <p class="text-center text-xs font-bold uppercase tracking-[0.25em] mb-5 text-[#6B7280]">
+        Marka dili, creator enerjisiyle birleşir
+      </p>
+      <div class="overflow-hidden">
+        <div class="marquee-track">
+          <span class="display text-2xl font-bold opacity-40">Beauty ✦ Lifestyle ✦ Fashion ✦ Food ✦ Tech ✦ Travel ✦ Apps ✦</span>
+          <span class="display text-2xl font-bold opacity-40">Merge UGC ✦ Merge UGC ✦ Merge UGC ✦ Merge UGC ✦</span>
+        </div>
+      </div>
     </section>
 
     <section id="services" class="w-full py-20">
       <div class="max-w-6xl mx-auto px-5">
-        <div class="max-w-2xl mb-14"><span class="text-sm font-bold uppercase tracking-widest text-[#3D5A80]">Hizmetler</span><h2 class="display font-black mt-3 leading-tight text-4xl md:text-5xl">UGC sürecini fikirden yayına kadar yönetiyoruz.</h2></div>
+        <div class="max-w-2xl mb-14">
+          <span class="text-sm font-bold uppercase tracking-widest text-[#3D5A80]">Hizmetler</span>
+          <h2 class="display font-black mt-3 leading-tight text-4xl md:text-5xl">
+            UGC sürecini fikirden yayına kadar yönetiyoruz.
+          </h2>
+        </div>
+
         <div class="grid md:grid-cols-3 gap-6">
-          <article class="card rounded-3xl p-8 hover:-translate-y-2 transition"><div class="tag w-14 h-14 rounded-2xl flex items-center justify-center mb-6"><i data-lucide="video"></i></div><h3 class="font-bold mb-3 text-xl">UGC Video Üretimi</h3><p class="text-sm leading-relaxed text-[#6B7280]">TikTok, Reels ve reklam kullanımı için doğal, hızlı tüketilen ve satış odaklı içerikler üretiriz.</p></article>
-          <article class="card rounded-3xl p-8 hover:-translate-y-2 transition"><div class="tag w-14 h-14 rounded-2xl flex items-center justify-center mb-6"><i data-lucide="sparkles"></i></div><h3 class="font-bold mb-3 text-xl">Creator Eşleşmesi</h3><p class="text-sm leading-relaxed text-[#6B7280]">Markanın tonuna, hedef kitlesine ve platform ihtiyacına göre doğru creator havuzunu seçeriz.</p></article>
-          <article class="card rounded-3xl p-8 hover:-translate-y-2 transition"><div class="tag w-14 h-14 rounded-2xl flex items-center justify-center mb-6"><i data-lucide="trending-up"></i></div><h3 class="font-bold mb-3 text-xl">Performans Kurgusu</h3><p class="text-sm leading-relaxed text-[#6B7280]">Hook, senaryo, CTA ve reklam kullanım haklarını performans hedeflerine göre kurgularız.</p></article>
+          <article class="card rounded-3xl p-8 hover:-translate-y-2 transition">
+            <div class="tag w-14 h-14 rounded-2xl flex items-center justify-center mb-6">
+              <i data-lucide="video"></i>
+            </div>
+            <h3 class="font-bold mb-3 text-xl">UGC Video Üretimi</h3>
+            <p class="text-sm leading-relaxed text-[#6B7280]">
+              TikTok, Reels ve reklam kullanımı için doğal, hızlı tüketilen ve satış odaklı içerikler üretiriz.
+            </p>
+          </article>
+
+          <article class="card rounded-3xl p-8 hover:-translate-y-2 transition">
+            <div class="tag w-14 h-14 rounded-2xl flex items-center justify-center mb-6">
+              <i data-lucide="sparkles"></i>
+            </div>
+            <h3 class="font-bold mb-3 text-xl">Creator Eşleşmesi</h3>
+            <p class="text-sm leading-relaxed text-[#6B7280]">
+              Markanın tonuna, hedef kitlesine ve platform ihtiyacına göre doğru creator havuzunu seçeriz.
+            </p>
+          </article>
+
+          <article class="card rounded-3xl p-8 hover:-translate-y-2 transition">
+            <div class="tag w-14 h-14 rounded-2xl flex items-center justify-center mb-6">
+              <i data-lucide="trending-up"></i>
+            </div>
+            <h3 class="font-bold mb-3 text-xl">Performans Kurgusu</h3>
+            <p class="text-sm leading-relaxed text-[#6B7280]">
+              Hook, senaryo, CTA ve reklam kullanım haklarını performans hedeflerine göre kurgularız.
+            </p>
+          </article>
         </div>
       </div>
     </section>
 
     <section id="showcase" class="w-full py-20 bg-[#E7DBCE]/45">
       <div class="max-w-6xl mx-auto px-5">
-        <div class="max-w-2xl mb-14"><span class="text-sm font-bold uppercase tracking-widest text-[#3D5A80]">Showcase</span><h2 class="display font-black mt-3 leading-tight text-4xl md:text-5xl">Sosyal medya için native görünen içerikler.</h2></div>
+        <div class="max-w-2xl mb-14">
+          <span class="text-sm font-bold uppercase tracking-widest text-[#3D5A80]">Showcase</span>
+          <h2 class="display font-black mt-3 leading-tight text-4xl md:text-5xl">
+            Sosyal medya için native görünen içerikler.
+          </h2>
+        </div>
+
         <div class="grid sm:grid-cols-3 gap-6">
-          <figure class="group rounded-3xl overflow-hidden shadow-lg relative soft-img" style="aspect-ratio:3/4"><figcaption class="absolute bottom-0 inset-x-0 p-4 font-bold text-white bg-gradient-to-t from-black/70 to-transparent">Beauty Routine</figcaption></figure>
-          <figure class="group rounded-3xl overflow-hidden shadow-lg relative soft-img" style="aspect-ratio:3/4"><figcaption class="absolute bottom-0 inset-x-0 p-4 font-bold text-white bg-gradient-to-t from-black/70 to-transparent">Lifestyle Review</figcaption></figure>
-          <figure class="group rounded-3xl overflow-hidden shadow-lg relative soft-img" style="aspect-ratio:3/4"><figcaption class="absolute bottom-0 inset-x-0 p-4 font-bold text-white bg-gradient-to-t from-black/70 to-transparent">Product Demo</figcaption></figure>
+          <figure class="group rounded-3xl overflow-hidden shadow-lg relative soft-img" style="aspect-ratio:3/4">
+            <figcaption class="absolute bottom-0 inset-x-0 p-4 font-bold text-white bg-gradient-to-t from-black/70 to-transparent">Beauty Routine</figcaption>
+          </figure>
+
+          <figure class="group rounded-3xl overflow-hidden shadow-lg relative soft-img" style="aspect-ratio:3/4">
+            <figcaption class="absolute bottom-0 inset-x-0 p-4 font-bold text-white bg-gradient-to-t from-black/70 to-transparent">Lifestyle Review</figcaption>
+          </figure>
+
+          <figure class="group rounded-3xl overflow-hidden shadow-lg relative soft-img" style="aspect-ratio:3/4">
+            <figcaption class="absolute bottom-0 inset-x-0 p-4 font-bold text-white bg-gradient-to-t from-black/70 to-transparent">Product Demo</figcaption>
+          </figure>
         </div>
       </div>
     </section>
@@ -106,53 +226,169 @@
     <section id="about" class="w-full py-20">
       <div class="max-w-6xl mx-auto px-5 grid lg:grid-cols-2 gap-12 items-center">
         <div class="rounded-[2rem] overflow-hidden shadow-2xl -rotate-2 soft-img h-[24rem]"></div>
-        <div><span class="text-sm font-bold uppercase tracking-widest text-[#3D5A80]">Merge yaklaşımı</span><h2 class="display font-black mt-3 mb-5 leading-tight text-4xl md:text-5xl">Ajans disiplini, creator doğallığı.</h2><p class="leading-relaxed mb-8 text-[#6B7280]">Markaların reklam ihtiyacını creator dünyasının doğal diliyle birleştiriyoruz. Her brief için hedef kitle, platform, içerik formatı ve performans hedeflerine göre özel bir üretim akışı kuruyoruz.</p>
-          <div class="grid grid-cols-3 gap-4"><div><p class="display font-black leading-none text-4xl">3x</p><p class="text-xs font-semibold mt-1 text-[#6B7280]">hızlı üretim</p></div><div><p class="display font-black leading-none text-4xl">360°</p><p class="text-xs font-semibold mt-1 text-[#6B7280]">süreç yönetimi</p></div><div><p class="display font-black leading-none text-4xl">100%</p><p class="text-xs font-semibold mt-1 text-[#6B7280]">native içerik</p></div></div>
+
+        <div>
+          <span class="text-sm font-bold uppercase tracking-widest text-[#3D5A80]">Merge yaklaşımı</span>
+          <h2 class="display font-black mt-3 mb-5 leading-tight text-4xl md:text-5xl">
+            Ajans disiplini, creator doğallığı.
+          </h2>
+          <p class="leading-relaxed mb-8 text-[#6B7280]">
+            Markaların reklam ihtiyacını creator dünyasının doğal diliyle birleştiriyoruz. Her brief için hedef kitle, platform, içerik formatı ve performans hedeflerine göre özel bir üretim akışı kuruyoruz.
+          </p>
+
+          <div class="grid grid-cols-3 gap-4">
+            <div>
+              <p class="display font-black leading-none text-4xl">3x</p>
+              <p class="text-xs font-semibold mt-1 text-[#6B7280]">hızlı üretim</p>
+            </div>
+            <div>
+              <p class="display font-black leading-none text-4xl">360°</p>
+              <p class="text-xs font-semibold mt-1 text-[#6B7280]">süreç yönetimi</p>
+            </div>
+            <div>
+              <p class="display font-black leading-none text-4xl">100%</p>
+              <p class="text-xs font-semibold mt-1 text-[#6B7280]">native içerik</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
     <section id="contact" class="w-full py-20">
       <div class="max-w-2xl mx-auto px-5">
-        <div class="text-center mb-10"><h2 class="display font-black leading-tight text-4xl md:text-5xl">Birlikte üretelim.</h2><p class="mt-3 text-[#6B7280]">Briefinizi bırakın, size en uygun UGC planıyla dönüş yapalım.</p></div>
-        <form
-  id="contact-form"
-  action="https://formspree.io/f/xjgqqlvo"
-  method="POST"
-  class="card rounded-3xl p-7 md:p-9 shadow-xl"
->
-  <div class="grid sm:grid-cols-2 gap-5">
-    <div>
-      <label for="f-name" class="block text-sm font-semibold mb-1.5">Ad Soyad</label>
-      <input id="f-name" name="name" type="text" required class="w-full rounded-xl border border-neutral-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#3D5A80] bg-white">
-    </div>
+        <div class="text-center mb-10">
+          <h2 class="display font-black leading-tight text-4xl md:text-5xl">Birlikte üretelim.</h2>
+          <p class="mt-3 text-[#6B7280]">Briefinizi bırakın, size en uygun UGC planıyla dönüş yapalım.</p>
+        </div>
 
-    <div>
-      <label for="f-email" class="block text-sm font-semibold mb-1.5">E-posta</label>
-      <input id="f-email" name="email" type="email" required class="w-full rounded-xl border border-neutral-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#3D5A80] bg-white">
-    </div>
-  </div>
+        <div id="form-wrapper">
+          <form id="contact-form" class="card rounded-3xl p-7 md:p-9 shadow-xl" novalidate>
+            <div class="grid sm:grid-cols-2 gap-5">
+              <div>
+                <label for="f-name" class="block text-sm font-semibold mb-1.5">Ad Soyad</label>
+                <input id="f-name" type="text" class="w-full rounded-xl border border-neutral-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#3D5A80] bg-white">
+              </div>
 
-  <div class="mt-5">
-    <label for="f-brand" class="block text-sm font-semibold mb-1.5">Marka</label>
-    <input id="f-brand" name="brand" type="text" class="w-full rounded-xl border border-neutral-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#3D5A80] bg-white">
-  </div>
+              <div>
+                <label for="f-email" class="block text-sm font-semibold mb-1.5">E-posta</label>
+                <input id="f-email" type="email" class="w-full rounded-xl border border-neutral-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#3D5A80] bg-white">
+              </div>
+            </div>
 
-  <div class="mt-5">
-    <label for="f-message" class="block text-sm font-semibold mb-1.5">Mesaj</label>
-    <textarea id="f-message" name="message" rows="4" required class="w-full rounded-xl border border-neutral-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#3D5A80] bg-white resize-none"></textarea>
-  </div>
+            <div class="mt-5">
+              <label for="f-brand" class="block text-sm font-semibold mb-1.5">Marka</label>
+              <input id="f-brand" type="text" class="w-full rounded-xl border border-neutral-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#3D5A80] bg-white">
+            </div>
 
-  <button type="submit" id="submit-btn" class="btn w-full mt-6 rounded-xl px-6 py-4 font-bold hover:scale-[1.01] transition">
-    Gönder
-  </button>
-</form>
+            <div class="mt-5">
+              <label for="f-message" class="block text-sm font-semibold mb-1.5">Mesaj</label>
+              <textarea id="f-message" rows="4" class="w-full rounded-xl border border-neutral-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#3D5A80] bg-white resize-none"></textarea>
+            </div>
+
+            <p id="form-error" class="hidden mt-4 text-sm font-semibold text-red-700" role="alert"></p>
+
+            <button type="submit" id="submit-btn" class="btn w-full mt-6 rounded-xl px-6 py-4 font-bold hover:scale-[1.01] transition disabled:opacity-60 disabled:cursor-not-allowed">
+              <span id="submit-label">Gönder</span>
+              <span id="submit-loading" class="hidden">Gönderiliyor…</span>
+            </button>
+          </form>
+
+          <div id="success-screen" class="hidden opacity-0 transition-opacity duration-500">
+            <div class="card rounded-3xl p-8 md:p-12 shadow-xl text-center">
+              <div class="flex justify-center mb-6">
+                <div class="success-circle w-20 h-20 rounded-full flex items-center justify-center">
+                  <i data-lucide="check" style="width:42px;height:42px;stroke-width:3"></i>
+                </div>
+              </div>
+
+              <h3 class="display font-black text-3xl md:text-4xl mb-3">Teşekkürler!</h3>
+              <p class="text-lg mb-8 max-w-md mx-auto text-[#6B7280]">
+                Mesajınız başarıyla alındı. Merge UGC ekibi en kısa sürede size dönüş yapacak.
+              </p>
+
+              <button type="button" id="reset-form-btn" class="btn rounded-full px-8 py-3.5 font-bold hover:scale-105 transition">
+                Yeni mesaj gönder
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </main>
-  <footer class="w-full py-12 border-t border-[#D8CEC4]"><div class="max-w-6xl mx-auto px-5 flex flex-col md:flex-row items-center justify-between gap-4"><span class="display font-black text-2xl">Merge UGC</span><p class="text-sm text-center text-[#6B7280]">Creator-led content for modern brands.</p><p class="text-xs opacity-70">© 2026 Merge UGC</p></div></footer>
+
+  <footer class="w-full py-12 border-t border-[#D8CEC4]">
+    <div class="max-w-6xl mx-auto px-5 flex flex-col md:flex-row items-center justify-between gap-4">
+      <span class="display font-black text-2xl">Merge UGC</span>
+      <p class="text-sm text-center text-[#6B7280]">Creator-led content for modern brands.</p>
+      <p class="text-xs opacity-70">© 2026 Merge UGC</p>
+    </div>
+  </footer>
+
   <script>
-  lucide.createIcons();
-</script>
+    lucide.createIcons();
+
+    const form = document.getElementById('contact-form');
+    const btn = document.getElementById('submit-btn');
+    const label = document.getElementById('submit-label');
+    const loading = document.getElementById('submit-loading');
+    const errEl = document.getElementById('form-error');
+    const successScreen = document.getElementById('success-screen');
+    const resetBtn = document.getElementById('reset-form-btn');
+
+    function showError(msg){
+      errEl.textContent = msg;
+      errEl.classList.remove('hidden');
+    }
+
+    function showSuccessScreen(){
+      form.classList.add('hidden');
+      successScreen.classList.remove('hidden');
+      void successScreen.offsetWidth;
+      successScreen.classList.remove('opacity-0');
+      lucide.createIcons();
+    }
+
+    function resetToForm(){
+      successScreen.classList.add('opacity-0');
+      setTimeout(() => {
+        successScreen.classList.add('hidden');
+        form.classList.remove('hidden');
+        form.reset();
+        errEl.classList.add('hidden');
+      }, 300);
+    }
+
+    resetBtn.addEventListener('click', resetToForm);
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errEl.classList.add('hidden');
+
+      const name = document.getElementById('f-name').value.trim();
+      const email = document.getElementById('f-email').value.trim();
+      const message = document.getElementById('f-message').value.trim();
+
+      if(!name || !email || !message){
+        showError('Lütfen adınızı, e-postanızı ve mesajınızı doldurun.');
+        return;
+      }
+
+      if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+        showError('Lütfen geçerli bir e-posta adresi girin.');
+        return;
+      }
+
+      btn.disabled = true;
+      label.classList.add('hidden');
+      loading.classList.remove('hidden');
+
+      setTimeout(() => {
+        showSuccessScreen();
+        btn.disabled = false;
+        label.classList.remove('hidden');
+        loading.classList.add('hidden');
+      }, 700);
+    });
+  </script>
 </body>
 </html>
