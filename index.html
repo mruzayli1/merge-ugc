@@ -4,11 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Merge UGC</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://unpkg.com/lucide@latest"></script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root{
       --primary:#3D5A80;
@@ -24,30 +27,38 @@
     }
 
     html{scroll-behavior:smooth}
+
     body{
       font-family:'Work Sans',sans-serif;
       background:var(--background);
       color:var(--text);
     }
+
     .display{font-family:'Fraunces',serif}
 
     @keyframes riseIn{
       from{opacity:0;transform:translateY(24px)}
       to{opacity:1;transform:translateY(0)}
     }
+
     .rise{opacity:0;animation:riseIn .8s cubic-bezier(.2,.7,.2,1) forwards}
-    .d1{animation-delay:.05s}.d2{animation-delay:.18s}.d3{animation-delay:.31s}.d4{animation-delay:.44s}
+    .d1{animation-delay:.05s}
+    .d2{animation-delay:.18s}
+    .d3{animation-delay:.31s}
+    .d4{animation-delay:.44s}
 
     @keyframes floaty{
       0%,100%{transform:translateY(0)}
       50%{transform:translateY(-10px)}
     }
+
     .float{animation:floaty 5s ease-in-out infinite}
 
     @keyframes scrollX{
       from{transform:translateX(0)}
       to{transform:translateX(-50%)}
     }
+
     .marquee-track{
       display:flex;
       gap:3rem;
@@ -57,26 +68,38 @@
 
     .btn{background:var(--primary);color:white}
     .btn:hover{background:var(--primary-hover)}
+
     .btn-outline{
       border-color:var(--primary);
       color:var(--primary);
       background:transparent;
     }
-    .btn-outline:hover{background:var(--primary);color:white}
+
+    .btn-outline:hover{
+      background:var(--primary);
+      color:white;
+    }
 
     .card{
       background:var(--card);
       border:1px solid var(--border);
       box-shadow:0 20px 45px rgba(29,36,51,.08);
     }
-    .tag{background:rgba(61,90,128,.12);color:var(--primary)}
+
+    .tag{
+      background:rgba(61,90,128,.12);
+      color:var(--primary);
+    }
+
     .glass{
       background:rgba(247,244,240,.72);
       border-bottom:1px solid rgba(216,206,196,.7);
     }
+
     .soft-img{
       background:linear-gradient(135deg,#d7c9bc,#f8f5f0 45%,#8aa4c4);
     }
+
     .success-circle{
       background:var(--success);
       color:white;
@@ -95,7 +118,9 @@
         <a href="#about" class="text-sm font-semibold hover:opacity-60 transition">Hakkımızda</a>
       </div>
 
-      <a href="#contact" class="btn rounded-full px-5 py-2.5 text-sm font-bold hover:scale-105 transition">İletişime Geç</a>
+      <a href="#contact" class="btn rounded-full px-5 py-2.5 text-sm font-bold hover:scale-105 transition">
+        İletişime Geç
+      </a>
     </nav>
   </header>
 
@@ -116,8 +141,12 @@
           </p>
 
           <div class="flex flex-wrap gap-4 rise d4">
-            <a href="#contact" class="btn rounded-full px-7 py-3.5 font-bold hover:scale-105 transition">Brief Gönder</a>
-            <a href="#showcase" class="btn-outline rounded-full px-7 py-3.5 font-bold border-2 hover:scale-105 transition">İçerikleri Gör</a>
+            <a href="#contact" class="btn rounded-full px-7 py-3.5 font-bold hover:scale-105 transition">
+              Brief Gönder
+            </a>
+            <a href="#showcase" class="btn-outline rounded-full px-7 py-3.5 font-bold border-2 hover:scale-105 transition">
+              İçerikleri Gör
+            </a>
           </div>
         </div>
 
@@ -147,10 +176,15 @@
       <p class="text-center text-xs font-bold uppercase tracking-[0.25em] mb-5 text-[#6B7280]">
         Marka dili, creator enerjisiyle birleşir
       </p>
+
       <div class="overflow-hidden">
         <div class="marquee-track">
-          <span class="display text-2xl font-bold opacity-40">Beauty ✦ Lifestyle ✦ Fashion ✦ Food ✦ Tech ✦ Travel ✦ Apps ✦</span>
-          <span class="display text-2xl font-bold opacity-40">Merge UGC ✦ Merge UGC ✦ Merge UGC ✦ Merge UGC ✦</span>
+          <span class="display text-2xl font-bold opacity-40">
+            Beauty ✦ Lifestyle ✦ Fashion ✦ Food ✦ Tech ✦ Travel ✦ Apps ✦
+          </span>
+          <span class="display text-2xl font-bold opacity-40">
+            Merge UGC ✦ Merge UGC ✦ Merge UGC ✦ Merge UGC ✦
+          </span>
         </div>
       </div>
     </section>
@@ -209,15 +243,21 @@
 
         <div class="grid sm:grid-cols-3 gap-6">
           <figure class="group rounded-3xl overflow-hidden shadow-lg relative soft-img" style="aspect-ratio:3/4">
-            <figcaption class="absolute bottom-0 inset-x-0 p-4 font-bold text-white bg-gradient-to-t from-black/70 to-transparent">Beauty Routine</figcaption>
+            <figcaption class="absolute bottom-0 inset-x-0 p-4 font-bold text-white bg-gradient-to-t from-black/70 to-transparent">
+              Beauty Routine
+            </figcaption>
           </figure>
 
           <figure class="group rounded-3xl overflow-hidden shadow-lg relative soft-img" style="aspect-ratio:3/4">
-            <figcaption class="absolute bottom-0 inset-x-0 p-4 font-bold text-white bg-gradient-to-t from-black/70 to-transparent">Lifestyle Review</figcaption>
+            <figcaption class="absolute bottom-0 inset-x-0 p-4 font-bold text-white bg-gradient-to-t from-black/70 to-transparent">
+              Lifestyle Review
+            </figcaption>
           </figure>
 
           <figure class="group rounded-3xl overflow-hidden shadow-lg relative soft-img" style="aspect-ratio:3/4">
-            <figcaption class="absolute bottom-0 inset-x-0 p-4 font-bold text-white bg-gradient-to-t from-black/70 to-transparent">Product Demo</figcaption>
+            <figcaption class="absolute bottom-0 inset-x-0 p-4 font-bold text-white bg-gradient-to-t from-black/70 to-transparent">
+              Product Demo
+            </figcaption>
           </figure>
         </div>
       </div>
@@ -229,9 +269,11 @@
 
         <div>
           <span class="text-sm font-bold uppercase tracking-widest text-[#3D5A80]">Merge yaklaşımı</span>
+
           <h2 class="display font-black mt-3 mb-5 leading-tight text-4xl md:text-5xl">
             Ajans disiplini, creator doğallığı.
           </h2>
+
           <p class="leading-relaxed mb-8 text-[#6B7280]">
             Markaların reklam ihtiyacını creator dünyasının doğal diliyle birleştiriyoruz. Her brief için hedef kitle, platform, içerik formatı ve performans hedeflerine göre özel bir üretim akışı kuruyoruz.
           </p>
@@ -241,10 +283,12 @@
               <p class="display font-black leading-none text-4xl">3x</p>
               <p class="text-xs font-semibold mt-1 text-[#6B7280]">hızlı üretim</p>
             </div>
+
             <div>
               <p class="display font-black leading-none text-4xl">360°</p>
               <p class="text-xs font-semibold mt-1 text-[#6B7280]">süreç yönetimi</p>
             </div>
+
             <div>
               <p class="display font-black leading-none text-4xl">100%</p>
               <p class="text-xs font-semibold mt-1 text-[#6B7280]">native içerik</p>
@@ -258,7 +302,9 @@
       <div class="max-w-2xl mx-auto px-5">
         <div class="text-center mb-10">
           <h2 class="display font-black leading-tight text-4xl md:text-5xl">Birlikte üretelim.</h2>
-          <p class="mt-3 text-[#6B7280]">Briefinizi bırakın, size en uygun UGC planıyla dönüş yapalım.</p>
+          <p class="mt-3 text-[#6B7280]">
+            Briefinizi bırakın, size en uygun UGC planıyla dönüş yapalım.
+          </p>
         </div>
 
         <div id="form-wrapper">
@@ -266,23 +312,23 @@
             <div class="grid sm:grid-cols-2 gap-5">
               <div>
                 <label for="f-name" class="block text-sm font-semibold mb-1.5">Ad Soyad</label>
-                <input id="f-name" type="text" class="w-full rounded-xl border border-neutral-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#3D5A80] bg-white">
+                <input id="f-name" name="name" type="text" class="w-full rounded-xl border border-neutral-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#3D5A80] bg-white">
               </div>
 
               <div>
                 <label for="f-email" class="block text-sm font-semibold mb-1.5">E-posta</label>
-                <input id="f-email" type="email" class="w-full rounded-xl border border-neutral-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#3D5A80] bg-white">
+                <input id="f-email" name="email" type="email" class="w-full rounded-xl border border-neutral-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#3D5A80] bg-white">
               </div>
             </div>
 
             <div class="mt-5">
               <label for="f-brand" class="block text-sm font-semibold mb-1.5">Marka</label>
-              <input id="f-brand" type="text" class="w-full rounded-xl border border-neutral-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#3D5A80] bg-white">
+              <input id="f-brand" name="brand" type="text" class="w-full rounded-xl border border-neutral-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#3D5A80] bg-white">
             </div>
 
             <div class="mt-5">
               <label for="f-message" class="block text-sm font-semibold mb-1.5">Mesaj</label>
-              <textarea id="f-message" rows="4" class="w-full rounded-xl border border-neutral-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#3D5A80] bg-white resize-none"></textarea>
+              <textarea id="f-message" name="message" rows="4" class="w-full rounded-xl border border-neutral-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#3D5A80] bg-white resize-none"></textarea>
             </div>
 
             <p id="form-error" class="hidden mt-4 text-sm font-semibold text-red-700" role="alert"></p>
@@ -302,6 +348,7 @@
               </div>
 
               <h3 class="display font-black text-3xl md:text-4xl mb-3">Teşekkürler!</h3>
+
               <p class="text-lg mb-8 max-w-md mx-auto text-[#6B7280]">
                 Mesajınız başarıyla alındı. Merge UGC ekibi en kısa sürede size dönüş yapacak.
               </p>
@@ -326,6 +373,8 @@
 
   <script>
     lucide.createIcons();
+
+    const FORM_ENDPOINT = "https://formspree.io/f/FORM_ID_BURAYA";
 
     const form = document.getElementById('contact-form');
     const btn = document.getElementById('submit-btn');
@@ -366,6 +415,7 @@
 
       const name = document.getElementById('f-name').value.trim();
       const email = document.getElementById('f-email').value.trim();
+      const brand = document.getElementById('f-brand').value.trim();
       const message = document.getElementById('f-message').value.trim();
 
       if(!name || !email || !message){
@@ -382,12 +432,35 @@
       label.classList.add('hidden');
       loading.classList.remove('hidden');
 
-      setTimeout(() => {
-        showSuccessScreen();
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("brand", brand);
+      formData.append("message", message);
+
+      try {
+        if (FORM_ENDPOINT.includes("FORM_ID_BURAYA")) {
+          setTimeout(showSuccessScreen, 500);
+        } else {
+          const response = await fetch(FORM_ENDPOINT, {
+            method: "POST",
+            body: formData,
+            headers: { "Accept": "application/json" }
+          });
+
+          if (!response.ok) {
+            throw new Error("Form gönderilemedi");
+          }
+
+          showSuccessScreen();
+        }
+      } catch (error) {
+        showError('Bir şeyler ters gitti. Lütfen tekrar deneyin.');
+      } finally {
         btn.disabled = false;
         label.classList.remove('hidden');
         loading.classList.add('hidden');
-      }, 700);
+      }
     });
   </script>
 </body>
