@@ -1,0 +1,575 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Merge UGC — Panel</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --primary:#3D5A80;
+      --primary-hover:#2E4A6E;
+      --secondary:#E7DBCE;
+      --background:#E6DED6;
+      --card:#F7F4F0;
+      --text:#1D2433;
+      --muted:#6B7280;
+      --border:#D8CEC4;
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:'Work Sans',sans-serif;
+      background:var(--background);
+      color:var(--text);
+    }
+
+    .display{font-family:'Fraunces',serif}
+
+    @keyframes riseIn{
+      from{opacity:0;transform:translateY(20px)}
+      to{opacity:1;transform:translateY(0)}
+    }
+
+    .rise{opacity:0;animation:riseIn .7s cubic-bezier(.2,.7,.2,1) forwards}
+    .d1{animation-delay:.05s}
+    .d2{animation-delay:.14s}
+    .d3{animation-delay:.23s}
+    .d4{animation-delay:.32s}
+    .d5{animation-delay:.41s}
+
+    .sidebar{
+      height:100vh;
+      background:rgba(247,244,240,.96);
+      border-right:1px solid var(--border);
+    }
+
+    .nav-item{
+      color:var(--muted);
+      transition:background .2s,color .2s,transform .2s;
+    }
+
+    .nav-item:hover{
+      background:rgba(216,206,196,.48);
+      color:var(--text);
+      transform:translateX(2px);
+    }
+
+    .nav-item.nav-active{
+      background:rgba(61,90,128,.12);
+      color:var(--primary);
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      box-shadow:0 16px 38px rgba(29,36,51,.07);
+    }
+
+    .card-hover{
+      transition:transform .25s,box-shadow .25s;
+    }
+
+    .card-hover:hover{
+      transform:translateY(-4px);
+      box-shadow:0 22px 46px rgba(29,36,51,.12);
+    }
+
+    .btn-primary{
+      background:var(--primary);
+      color:#fff;
+    }
+
+    .btn-primary:hover{background:var(--primary-hover)}
+
+    .btn-outline{
+      border:2px solid var(--primary);
+      color:var(--primary);
+      background:transparent;
+    }
+
+    .btn-outline:hover{
+      background:var(--primary);
+      color:#fff;
+    }
+
+    .save-btn.saved{
+      background:var(--primary);
+      color:#fff;
+    }
+
+    .save-btn.saved svg{fill:currentColor}
+
+    @media (max-width:1023px){
+      .sidebar{
+        position:fixed;
+        inset:0 auto 0 0;
+        width:16rem;
+        z-index:50;
+        transform:translateX(-100%);
+        transition:transform .3s ease;
+        box-shadow:0 24px 60px rgba(29,36,51,.24);
+      }
+      .sidebar.open{transform:translateX(0)}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="lg:hidden sticky top-0 z-40 flex items-center justify-between px-4 py-3 border-b border-[#D8CEC4] bg-[#E6DED6]/90 backdrop-blur-md">
+    <span class="display font-black text-xl">Merge UGC</span>
+    <button id="menu-toggle" type="button" aria-label="Menüyü aç" class="p-2 rounded-xl hover:bg-[#D8CEC4]/60">
+      <i data-lucide="menu"></i>
+    </button>
+  </div>
+
+  <div id="backdrop" class="hidden lg:hidden fixed inset-0 z-40 bg-black/40"></div>
+
+  <div class="min-h-screen lg:flex">
+    <aside class="sidebar fixed lg:sticky top-0 left-0 z-50 w-64 shrink-0 flex flex-col justify-between">
+      <div>
+        <div class="px-6 py-6">
+          <span class="display font-black text-2xl tracking-tight">Merge UGC</span>
+        </div>
+
+        <nav class="px-3 space-y-1" aria-label="Ana menü">
+          <button data-view="dashboard" class="nav-item nav-active w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-left">
+            <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+            <span>Panel</span>
+          </button>
+
+          <button data-view="library" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-left">
+            <i data-lucide="images" class="w-5 h-5"></i>
+            <span>Kütüphane</span>
+          </button>
+
+          <button data-view="packages" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-left">
+            <i data-lucide="package" class="w-5 h-5"></i>
+            <span>Paketler</span>
+          </button>
+
+          <button data-view="orders" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-left">
+            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+            <span>Siparişlerim</span>
+          </button>
+
+          <button data-view="payments" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-left">
+            <i data-lucide="credit-card" class="w-5 h-5"></i>
+            <span>Ödemeler</span>
+          </button>
+
+          <button data-view="account" class="nav-item w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-left">
+            <i data-lucide="user" class="w-5 h-5"></i>
+            <span>Hesabım</span>
+          </button>
+        </nav>
+      </div>
+
+      <div class="p-4">
+        <div class="card rounded-2xl p-4">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 bg-[#3D5A80] text-white">
+              <i data-lucide="user" class="w-5 h-5"></i>
+            </div>
+
+            <div class="min-w-0">
+              <p class="font-semibold text-sm truncate">Kişisel Hesap</p>
+              <p class="text-xs text-[#6B7280] truncate">hello@mergeugc.com</p>
+            </div>
+          </div>
+
+          <button type="button" data-action="logout" class="btn-primary mt-3 w-full flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-bold transition">
+            <i data-lucide="log-out" class="w-4 h-4"></i>
+            <span>Çıkış Yap</span>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <main class="flex-1 min-w-0 px-5 md:px-8 py-8 lg:py-10">
+      <div class="max-w-6xl mx-auto">
+
+        <div id="dashboard-view">
+          <section class="rise d1 mb-10">
+            <h1 class="display font-black leading-tight text-4xl md:text-6xl mb-3">Tekrar hoş geldiniz 👋</h1>
+            <p class="text-lg max-w-xl mb-6 text-[#6B7280]">
+              İlk UGC projenizi başlatın ve kullanıma hazır içerikleri keşfedin.
+            </p>
+
+            <div class="flex flex-wrap gap-3">
+              <button type="button" data-action="browse" class="btn-primary rounded-full px-6 py-3 font-bold hover:scale-105 transition">
+                Kütüphaneyi İncele
+              </button>
+              <button type="button" data-action="custom" class="btn-outline rounded-full px-6 py-3 font-bold hover:scale-105 transition">
+                Özel Sipariş Oluştur
+              </button>
+            </div>
+          </section>
+
+          <section class="rise d2 grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+            <article class="card card-hover rounded-2xl p-5">
+              <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4 bg-[#E7DBCE] text-[#3D5A80]">
+                <i data-lucide="wallet" class="w-5 h-5"></i>
+              </div>
+              <p class="display font-black leading-none text-3xl mb-1">₺0</p>
+              <p class="text-sm font-medium text-[#6B7280]">Kullanılabilir Bakiye</p>
+            </article>
+
+            <article class="card card-hover rounded-2xl p-5">
+              <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4 bg-[#E7DBCE] text-[#3D5A80]">
+                <i data-lucide="clock" class="w-5 h-5"></i>
+              </div>
+              <p class="display font-black leading-none text-3xl mb-1">0</p>
+              <p class="text-sm font-medium text-[#6B7280]">Aktif Siparişler</p>
+            </article>
+
+            <article class="card card-hover rounded-2xl p-5">
+              <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4 bg-[#E7DBCE] text-[#3D5A80]">
+                <i data-lucide="folder-check" class="w-5 h-5"></i>
+              </div>
+              <p class="display font-black leading-none text-3xl mb-1">0</p>
+              <p class="text-sm font-medium text-[#6B7280]">Teslim Edilen İçerikler</p>
+            </article>
+
+            <article class="card card-hover rounded-2xl p-5">
+              <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4 bg-[#E7DBCE] text-[#3D5A80]">
+                <i data-lucide="heart" class="w-5 h-5"></i>
+              </div>
+              <p class="display font-black leading-none text-3xl mb-1">0</p>
+              <p class="text-sm font-medium text-[#6B7280]">Kaydedilen Paketler</p>
+            </article>
+          </section>
+
+          <section class="rise d3 mb-12">
+            <h2 class="display font-black text-3xl mb-5">Son Siparişler</h2>
+            <div class="card rounded-3xl p-10 text-center">
+              <div class="mx-auto w-16 h-16 rounded-2xl flex items-center justify-center mb-5 bg-[#E7DBCE] text-[#3D5A80]">
+                <i data-lucide="shopping-bag" class="w-8 h-8"></i>
+              </div>
+              <h3 class="display font-bold text-2xl mb-2">Henüz siparişiniz bulunmuyor</h3>
+              <p class="text-sm max-w-sm mx-auto mb-6 text-[#6B7280]">
+                Satın aldığınız paketler ve özel UGC siparişleriniz burada görünecek.
+              </p>
+              <button type="button" data-action="custom" class="btn-primary rounded-full px-6 py-3 font-bold hover:scale-105 transition">
+                İlk Siparişini Oluştur
+              </button>
+            </div>
+          </section>
+
+          <section class="rise d4 mb-12">
+            <h2 class="display font-black text-3xl mb-5">Öne Çıkan Kategoriler</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4" id="featured-grid"></div>
+          </section>
+
+          <section class="rise d5 mb-8">
+            <h2 class="display font-black text-3xl mb-5">Popüler Paketler</h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5" id="popular-grid"></div>
+          </section>
+        </div>
+
+        <div id="library-view" class="hidden">
+          <div class="mb-8">
+            <h1 class="display font-black leading-tight text-4xl md:text-6xl mb-2">UGC Kütüphanesi</h1>
+            <p class="text-lg max-w-3xl mb-3 text-[#6B7280]">
+              Markanız için kullanıma hazır UGC paketlerini keşfedin.
+            </p>
+            <p id="library-count" class="text-sm font-semibold text-[#3D5A80]"></p>
+          </div>
+
+          <div class="card rounded-2xl p-6 mb-8">
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-4 mb-6">
+              <div class="lg:col-span-3">
+                <input id="lib-search" type="text" placeholder="Paket ara..." class="w-full px-4 py-3 rounded-xl border border-[#D8CEC4] bg-white focus:outline-none focus:ring-2 focus:ring-[#3D5A80]/20">
+              </div>
+
+              <select id="lib-sort" class="w-full px-4 py-3 rounded-xl border border-[#D8CEC4] bg-white focus:outline-none focus:ring-2 focus:ring-[#3D5A80]/20">
+                <option value="newest">En yeniler</option>
+                <option value="popular">En popüler</option>
+                <option value="price-low">Fiyat: düşükten yükseğe</option>
+                <option value="price-high">Fiyat: yüksekten düşüğe</option>
+              </select>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+              <select id="filter-category" class="px-3 py-2 rounded-lg border border-[#D8CEC4] bg-white text-sm">
+                <option value="">Tüm kategoriler</option>
+                <option>Beauty</option>
+                <option>Moda</option>
+                <option>Teknoloji</option>
+                <option>Yiyecek & İçecek</option>
+                <option>Seyahat</option>
+                <option>Uygulamalar</option>
+              </select>
+
+              <select id="filter-format" class="px-3 py-2 rounded-lg border border-[#D8CEC4] bg-white text-sm">
+                <option value="">Tüm formatlar</option>
+                <option>Talking Head</option>
+                <option>GRWM</option>
+                <option>Ürün Demosu</option>
+                <option>Referans</option>
+                <option>Reaksiyon</option>
+                <option>Seslendirme</option>
+                <option>B-Roll</option>
+              </select>
+
+              <select id="filter-platform" class="px-3 py-2 rounded-lg border border-[#D8CEC4] bg-white text-sm">
+                <option value="">Tüm platformlar</option>
+                <option>TikTok</option>
+                <option>Instagram</option>
+                <option>YouTube</option>
+                <option>Reels</option>
+                <option>Shorts</option>
+              </select>
+
+              <select id="filter-asset" class="px-3 py-2 rounded-lg border border-[#D8CEC4] bg-white text-sm">
+                <option value="">Tüm içerik türleri</option>
+                <option>Video</option>
+                <option>Fotoğraf</option>
+                <option>Animasyon</option>
+              </select>
+
+              <select id="filter-price" class="px-3 py-2 rounded-lg border border-[#D8CEC4] bg-white text-sm">
+                <option value="">Tüm fiyatlar</option>
+                <option value="0-4999">₺0 – ₺4.999</option>
+                <option value="5000-7999">₺5.000 – ₺7.999</option>
+                <option value="8000+">₺8.000+</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="lib-packages-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] hidden">
+    <div class="rounded-full px-5 py-3 shadow-lg text-sm font-semibold text-white flex items-center gap-2 bg-[#1D2433]">
+      <i data-lucide="info" class="w-4 h-4"></i>
+      <span id="toast-msg"></span>
+    </div>
+  </div>
+
+  <script>
+    const categories = [
+      {name:'Beauty', desc:'Bakım, makyaj ve skincare içerikleri.'},
+      {name:'Moda', desc:'Kombin, stil ve günlük moda içerikleri.'},
+      {name:'Teknoloji', desc:'Ürün demosu ve inceleme içerikleri.'},
+      {name:'Yiyecek & İçecek', desc:'Tarif, tadım ve ürün içerikleri.'},
+      {name:'Seyahat', desc:'Otel, destinasyon ve deneyim içerikleri.'},
+      {name:'Uygulamalar', desc:'Uygulama tanıtımı ve reaksiyon içerikleri.'}
+    ];
+
+    const packages = [
+      {id:1,name:'Lüks Skincare',category:'Beauty',format:'Ürün Demosu',platform:'TikTok',assetType:'Video',assets:38,creators:4,price:5490,image:'https://images.pexels.com/photos/15930068/pexels-photo-15930068.jpeg'},
+      {id:2,name:'Günlük Yaşam',category:'Moda',format:'GRWM',platform:'Instagram',assetType:'Video',assets:42,creators:3,price:4790,image:'https://images.pexels.com/photos/6311392/pexels-photo-6311392.jpeg'},
+      {id:3,name:'Uygulama Reaksiyon Paketi',category:'Uygulamalar',format:'Reaksiyon',platform:'YouTube',assetType:'Video',assets:60,creators:5,price:6990,image:'https://images.pexels.com/photos/5081918/pexels-photo-5081918.jpeg'},
+      {id:4,name:'Teknoloji Kutudan Çıkarma',category:'Teknoloji',format:'Ürün Demosu',platform:'YouTube',assetType:'Video',assets:35,creators:4,price:5790,image:'https://images.pexels.com/photos/1229861/pexels-photo-1229861.jpeg'},
+      {id:5,name:'Seyahat Vlog Paketi',category:'Seyahat',format:'B-Roll',platform:'TikTok',assetType:'Video',assets:50,creators:3,price:6290,image:'https://images.pexels.com/photos/2404046/pexels-photo-2404046.jpeg'},
+      {id:6,name:'Yemek Stil Paketi',category:'Yiyecek & İçecek',format:'Talking Head',platform:'Instagram',assetType:'Fotoğraf',assets:28,creators:2,price:3990,image:'https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg'},
+      {id:7,name:'Makyaj Eğitimi',category:'Beauty',format:'GRWM',platform:'TikTok',assetType:'Video',assets:45,creators:3,price:5190,image:'https://images.pexels.com/photos/2113855/pexels-photo-2113855.jpeg'},
+      {id:8,name:'Moda Alışveriş Paketi',category:'Moda',format:'Referans',platform:'YouTube',assetType:'Video',assets:38,creators:2,price:4590,image:'https://images.pexels.com/photos/2703202/pexels-photo-2703202.jpeg'},
+      {id:9,name:'Uygulama Demo Kiti',category:'Uygulamalar',format:'Ürün Demosu',platform:'Reels',assetType:'Video',assets:55,creators:4,price:6790,image:'https://images.pexels.com/photos/4152297/pexels-photo-4152297.jpeg'},
+      {id:10,name:'Kahve Yaşam Paketi',category:'Yiyecek & İçecek',format:'B-Roll',platform:'Instagram',assetType:'Fotoğraf',assets:30,creators:2,price:3490,image:'https://images.pexels.com/photos/12900869/pexels-photo-12900869.jpeg'},
+      {id:11,name:'Fitness Motivasyon',category:'Moda',format:'Referans',platform:'Shorts',assetType:'Video',assets:40,creators:3,price:5490,image:'https://images.pexels.com/photos/6551136/pexels-photo-6551136.jpeg'},
+      {id:12,name:'Seyahat Referansları',category:'Seyahat',format:'Referans',platform:'YouTube',assetType:'Video',assets:48,creators:5,price:7290,image:'https://images.pexels.com/photos/5552737/pexels-photo-5552737.jpeg'}
+    ];
+
+    let filteredPackages = [...packages];
+    let toastTimer;
+
+    function formatPrice(value){
+      return new Intl.NumberFormat('tr-TR',{style:'currency',currency:'TRY',maximumFractionDigits:0}).format(value);
+    }
+
+    function showToast(message){
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-msg');
+      toastMsg.textContent = message;
+      toast.classList.remove('hidden');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.add('hidden'),2400);
+    }
+
+    function createPackageCard(pkg){
+      const article = document.createElement('article');
+      article.className = 'card card-hover rounded-3xl overflow-hidden';
+
+      article.innerHTML = `
+        <div class="relative overflow-hidden aspect-[4/5]">
+          <img loading="lazy" src="${pkg.image}" alt="${pkg.name}" class="w-full h-full object-cover">
+          <button type="button" class="save-btn absolute top-3 right-3 w-10 h-10 rounded-full bg-white/90 backdrop-blur flex items-center justify-center shadow text-[#3D5A80]" aria-label="Paketi kaydet">
+            <i data-lucide="heart" class="w-5 h-5"></i>
+          </button>
+        </div>
+        <div class="p-5">
+          <h3 class="display font-black text-2xl mb-3">${pkg.name}</h3>
+          <div class="flex flex-wrap items-center gap-4 mb-4 text-sm text-[#6B7280]">
+            <span class="inline-flex items-center gap-1.5"><i data-lucide="film" class="w-4 h-4"></i>${pkg.assets} İçerik</span>
+            <span class="inline-flex items-center gap-1.5"><i data-lucide="users" class="w-4 h-4"></i>${pkg.creators} Creator</span>
+          </div>
+          <p class="display font-black text-3xl mb-4">${formatPrice(pkg.price)}</p>
+          <div class="flex gap-2">
+            <button type="button" data-action="preview" class="btn-outline flex-1 rounded-xl px-4 py-2.5 text-sm font-bold transition">Önizle</button>
+            <button type="button" data-action="buy" class="btn-primary flex-1 rounded-xl px-4 py-2.5 text-sm font-bold transition">Satın Al</button>
+          </div>
+        </div>
+      `;
+
+      article.querySelector('.save-btn').addEventListener('click',e=>{
+        e.stopPropagation();
+        e.currentTarget.classList.toggle('saved');
+      });
+
+      article.querySelector('[data-action="preview"]').addEventListener('click',()=>showToast('Paket detay sayfası yakında hazır olacak.'));
+      article.querySelector('[data-action="buy"]').addEventListener('click',()=>showToast('Ödeme sayfası yakında hazır olacak.'));
+
+      return article;
+    }
+
+    function renderFeatured(){
+      const grid = document.getElementById('featured-grid');
+      grid.innerHTML = '';
+
+      categories.forEach((cat,index)=>{
+        const article = document.createElement('article');
+        article.className = 'card card-hover rounded-2xl overflow-hidden';
+        article.innerHTML = `
+          <div class="aspect-[3/4] bg-gradient-to-br from-[#d7c9bc] via-[#f8f5f0] to-[#8aa4c4]"></div>
+          <div class="p-4">
+            <h3 class="font-bold text-lg mb-1">${cat.name}</h3>
+            <p class="text-xs mb-3 leading-relaxed text-[#6B7280]">${cat.desc}</p>
+            <button type="button" class="text-sm font-bold text-[#3D5A80]">Keşfet →</button>
+          </div>
+        `;
+        article.querySelector('button').addEventListener('click',()=>{
+          document.querySelector('[data-view="library"]').click();
+          document.getElementById('filter-category').value = cat.name;
+          applyFilters();
+        });
+        grid.appendChild(article);
+      });
+    }
+
+    function renderPopular(){
+      const grid = document.getElementById('popular-grid');
+      grid.innerHTML = '';
+      packages.slice(0,3).forEach(pkg=>grid.appendChild(createPackageCard(pkg)));
+      lucide.createIcons();
+    }
+
+    function renderLibrary(){
+      const grid = document.getElementById('lib-packages-grid');
+      grid.innerHTML = '';
+      filteredPackages.forEach(pkg=>grid.appendChild(createPackageCard(pkg)));
+      document.getElementById('library-count').textContent = `${filteredPackages.length} paket`;
+      lucide.createIcons();
+    }
+
+    function applyFilters(){
+      const search = document.getElementById('lib-search').value.trim().toLowerCase();
+      const category = document.getElementById('filter-category').value;
+      const format = document.getElementById('filter-format').value;
+      const platform = document.getElementById('filter-platform').value;
+      const asset = document.getElementById('filter-asset').value;
+      const price = document.getElementById('filter-price').value;
+      const sort = document.getElementById('lib-sort').value;
+
+      filteredPackages = packages.filter(pkg=>{
+        const searchMatch = pkg.name.toLowerCase().includes(search);
+        const categoryMatch = !category || pkg.category === category;
+        const formatMatch = !format || pkg.format === format;
+        const platformMatch = !platform || pkg.platform === platform;
+        const assetMatch = !asset || pkg.assetType === asset;
+
+        let priceMatch = true;
+        if(price === '0-4999') priceMatch = pkg.price <= 4999;
+        if(price === '5000-7999') priceMatch = pkg.price >= 5000 && pkg.price <= 7999;
+        if(price === '8000+') priceMatch = pkg.price >= 8000;
+
+        return searchMatch && categoryMatch && formatMatch && platformMatch && assetMatch && priceMatch;
+      });
+
+      if(sort === 'popular') filteredPackages.sort((a,b)=>b.creators-a.creators);
+      else if(sort === 'price-low') filteredPackages.sort((a,b)=>a.price-b.price);
+      else if(sort === 'price-high') filteredPackages.sort((a,b)=>b.price-a.price);
+      else filteredPackages.sort((a,b)=>b.id-a.id);
+
+      renderLibrary();
+    }
+
+    lucide.createIcons();
+    renderFeatured();
+    renderPopular();
+    renderLibrary();
+
+    const sidebar = document.querySelector('.sidebar');
+    const backdrop = document.getElementById('backdrop');
+    const menuToggle = document.getElementById('menu-toggle');
+
+    menuToggle?.addEventListener('click',()=>{
+      sidebar.classList.add('open');
+      backdrop.classList.remove('hidden');
+    });
+
+    backdrop?.addEventListener('click',()=>{
+      sidebar.classList.remove('open');
+      backdrop.classList.add('hidden');
+    });
+
+    document.querySelectorAll('.nav-item').forEach(item=>{
+      item.addEventListener('click',()=>{
+        document.querySelectorAll('.nav-item').forEach(nav=>nav.classList.remove('nav-active'));
+        item.classList.add('nav-active');
+
+        const view = item.dataset.view;
+        const dashboardView = document.getElementById('dashboard-view');
+        const libraryView = document.getElementById('library-view');
+
+        if(view === 'dashboard'){
+          libraryView.classList.add('hidden');
+          dashboardView.classList.remove('hidden');
+        } else if(view === 'library'){
+          dashboardView.classList.add('hidden');
+          libraryView.classList.remove('hidden');
+          applyFilters();
+        } else {
+          showToast(item.textContent.trim() + ' bölümü yakında hazır olacak.');
+        }
+
+        if(window.innerWidth < 1024){
+          sidebar.classList.remove('open');
+          backdrop.classList.add('hidden');
+        }
+      });
+    });
+
+    document.querySelectorAll('[data-action="browse"]').forEach(btn=>{
+      btn.addEventListener('click',()=>document.querySelector('[data-view="library"]').click());
+    });
+
+    document.querySelectorAll('[data-action="custom"]').forEach(btn=>{
+      btn.addEventListener('click',()=>showToast('Özel sipariş akışı yakında hazır olacak.'));
+    });
+
+    document.querySelector('[data-action="logout"]').addEventListener('click',()=>{
+      showToast('Çıkış sistemi kullanıcı girişi eklendiğinde bağlanacak.');
+    });
+
+    ['lib-search','lib-sort','filter-category','filter-format','filter-platform','filter-asset','filter-price'].forEach(id=>{
+      const element = document.getElementById(id);
+      element.addEventListener(element.tagName === 'INPUT' ? 'input' : 'change',applyFilters);
+    });
+  </script>
+</body>
+</html>
